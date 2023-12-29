@@ -173,3 +173,7 @@ export PATH="$HOME/.nodebrew/current/bin:$PATH"
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
+
+# deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
