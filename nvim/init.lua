@@ -21,27 +21,25 @@ require("packer").startup(function()
 end)
 
 -- ----------------------------------------------------------------------------
--- カラースキーム
+-- 基本設定
 -- ----------------------------------------------------------------------------
+-- Colorscheme
 require('monokai').setup { palette = require('monokai').ristretto }
 
--- ----------------------------------------------------------------------------
--- <Leader>
--- ----------------------------------------------------------------------------
+-- <Space> to <Leader>
 vim.g.mapleader = ' '
 
--- ----------------------------------------------------------------------------
--- クリップボード
--- ----------------------------------------------------------------------------
+-- Clipboard
 vim.opt.clipboard = "unnamedplus"
 
--- ----------------------------------------------------------------------------
--- ホワイトスペース
--- ----------------------------------------------------------------------------
+-- Whitespace
 vim.opt.expandtab = true
 vim.opt.smarttab = true
 vim.opt.ts = 2
 vim.opt.sw = 2
+
+-- Row Number
+vim.opt.number = true
 
 -- ----------------------------------------------------------------------------
 -- コメント
@@ -62,5 +60,17 @@ vim.keymap.set('n', '<leader>f', builtin.find_files, {})
 vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>u', builtin.oldfiles, {})
 
-vim.opt.completeopt = 'menuone,noinsert'
+-- ----------------------------------------------------------------------------
+-- Coc
+-- ----------------------------------------------------------------------------
+vim.keymap.set('n', 'gd', '<Plug>(coc-definition)')
+vim.keymap.set('n', 'gu', '<Plug>(coc-references)')
+vim.keymap.set('n', 'gr', '<Plug>(coc-rename)')
+vim.keymap.set('n', 'gf', '<Plug>(coc-format)')
+
+-- Coc Snippets
+vim.g.coc_snippets_next = '<c-j>'
+vim.g.coc_snippets_prev = '<c-k>'
+vim.keymap.set('i', '<C-k>', '<Plug>(coc-snippets-expand-jump)')
