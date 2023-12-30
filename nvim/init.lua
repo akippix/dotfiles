@@ -16,6 +16,11 @@ require("packer").startup(function()
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  use {
+    "nvim-telescope/telescope-file-browser.nvim",
+    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  }
+
   -- IDE
   use { 'neoclide/coc.nvim', branch = 'release' }
 end)
@@ -55,12 +60,20 @@ vim.keymap.set('n', '<C-p>', ':bprev<CR>')
 -- ----------------------------------------------------------------------------
 -- Telescope
 -- ----------------------------------------------------------------------------
+require('telescope').setup{ defaults = { file_ignore_patterns = {"node_modules"} } }
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', builtin.find_files, {})
 vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>u', builtin.oldfiles, {})
+vim.keymap.set('n', '<leader>u', builtin.oldfiles, {})
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>t",
+  ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+  { noremap = true }
+)
 
 -- ----------------------------------------------------------------------------
 -- Coc
