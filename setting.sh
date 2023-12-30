@@ -19,7 +19,7 @@ if [ -e ~/.zshrc ]; then
 fi
 ln -s $CURRENT/.zshrc ~
 
-if [ -e ~/.gitignore ]; then
-  unlink ~/.gitignore
+if [ -e ~/.gitconfig ]; then
+  unlink ~/.gitconfig
 fi
-ln -s $CURRENT/.gitignore ~
+ln -s $CURRENT/.gitconfig ~
