@@ -1,0 +1,15 @@
+[init]
+	defaultBranch = main
+[user]
+	email = akippix@outlook.jp
+	name = akippix
+	signingkey = F3F40A39EBABE61D10E2247F1CB4A5647B44A69D
+[commit]
+	gpgsign = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
