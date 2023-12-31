@@ -3,7 +3,7 @@
 [user]
 	email = akippix@outlook.jp
 	name = akippix
-	signingkey = F3F40A39EBABE61D10E2247F1CB4A5647B44A69D
+	signingkey = 9739AA18A315A642CD6E70B632773FBB32A7BA1F
 [commit]
 	gpgsign = true
 [alias]
