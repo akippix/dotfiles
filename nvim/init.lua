@@ -24,8 +24,11 @@ require("packer").startup(function()
   -- IDE
   use { 'neoclide/coc.nvim', branch = 'release' }
 
-  -- Lexima
-  use { 'cohama/lexima.vim' }
+  -- Auto Pairs
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
 
   -- tree sitter
   use {
@@ -114,4 +117,5 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
+  indent = { enable = true },
 }
