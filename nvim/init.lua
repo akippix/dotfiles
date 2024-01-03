@@ -23,6 +23,18 @@ require("packer").startup(function()
 
   -- IDE
   use { 'neoclide/coc.nvim', branch = 'release' }
+
+  -- Lexima
+  use { 'cohama/lexima.vim' }
+
+  -- tree sitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
+ 
+  -- autotag
+  use { 'windwp/nvim-ts-autotag' }
 end)
 
 -- ----------------------------------------------------------------------------
@@ -40,6 +52,8 @@ vim.opt.clipboard = "unnamedplus"
 -- Whitespace
 vim.opt.expandtab = true
 vim.opt.smarttab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 vim.opt.ts = 2
 vim.opt.sw = 2
 
@@ -87,3 +101,17 @@ vim.keymap.set('n', 'gf', '<Plug>(coc-format)')
 vim.g.coc_snippets_next = '<c-j>'
 vim.g.coc_snippets_prev = '<c-k>'
 vim.keymap.set('i', '<C-k>', '<Plug>(coc-snippets-expand-jump)')
+
+-- ----------------------------------------------------------------------------
+-- Tree Sitter
+-- ----------------------------------------------------------------------------
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+  sync_install = false,
+  auto_install = true,
+
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
