@@ -38,6 +38,13 @@ require("packer").startup(function()
  
   -- autotag
   use { 'windwp/nvim-ts-autotag' }
+
+  -- none-ls
+  use({
+    "nvimtools/none-ls.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = true,
+  })
 end)
 
 -- ----------------------------------------------------------------------------
@@ -119,3 +126,23 @@ require'nvim-treesitter.configs'.setup {
   },
   indent = { enable = true },
 }
+
+-- ----------------------------------------------------------------------------
+-- none-ls
+-- ----------------------------------------------------------------------------
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.completion.spell,
+    },
+})
+
+vim.keymap.set('n', '<leader>p', function()
+  vim.lsp.buf.format {
+    timeout_ms = 1000,
+    async = true,
+  }
+end)
