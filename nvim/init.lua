@@ -45,6 +45,9 @@ require("packer").startup(function()
     requires = { "nvim-lua/plenary.nvim" },
     config = true,
   })
+
+  -- fidget
+  use { 'j-hui/fidget.nvim' }
 end)
 
 -- ----------------------------------------------------------------------------
@@ -146,3 +149,8 @@ vim.keymap.set('n', '<leader>p', function()
     async = true,
   }
 end)
+
+-- ----------------------------------------------------------------------------
+-- fidget
+-- ----------------------------------------------------------------------------
+require("fidget").setup()
