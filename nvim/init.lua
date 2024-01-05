@@ -105,6 +105,8 @@ vim.api.nvim_set_keymap(
 -- ----------------------------------------------------------------------------
 -- Coc
 -- ----------------------------------------------------------------------------
+vim.opt.completeopt = menuone,noinsert
+
 vim.keymap.set('n', 'gd', '<Plug>(coc-definition)')
 vim.keymap.set('n', 'gu', '<Plug>(coc-references)')
 vim.keymap.set('n', 'gr', '<Plug>(coc-rename)')
