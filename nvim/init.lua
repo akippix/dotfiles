@@ -4,6 +4,9 @@ vim.cmd [[packadd packer.nvim]]
 -- プラグインの管理
 -- ----------------------------------------------------------------------------
 require("packer").startup(function()
+  -- Packer
+  use 'wbthomason/packer.nvim'
+
   -- UI
   use 'vim-airline/vim-airline'
   use 'tanvirtin/monokai.nvim'
@@ -35,19 +38,27 @@ require("packer").startup(function()
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
- 
+
   -- autotag
   use { 'windwp/nvim-ts-autotag' }
 
-  -- none-ls
-  use({
-    "nvimtools/none-ls.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
-    config = true,
-  })
+  -- none-ls -- too heavy for my pc
+  -- use({
+  --   "nvimtools/none-ls.nvim",
+  --   requires = { "nvim-lua/plenary.nvim" },
+  --   config = true,
+  -- })
 
   -- fidget
   use { 'j-hui/fidget.nvim' }
+
+  -- Lsp Install
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+    j
+  }
 end)
 
 -- ----------------------------------------------------------------------------
@@ -87,7 +98,7 @@ vim.keymap.set('n', '<C-p>', ':bprev<CR>')
 -- ----------------------------------------------------------------------------
 -- Telescope
 -- ----------------------------------------------------------------------------
-require('telescope').setup{ defaults = { file_ignore_patterns = {"node_modules"} } }
+require('telescope').setup{ defaults = { file_ignore_patterns = { "node_modules", ".next/" } } }
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', builtin.find_files, {})
 vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
@@ -135,24 +146,71 @@ require'nvim-treesitter.configs'.setup {
 -- ----------------------------------------------------------------------------
 -- none-ls
 -- ----------------------------------------------------------------------------
-local null_ls = require("null-ls")
-
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.prettier,
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.completion.spell,
-    },
-})
-
-vim.keymap.set('n', '<leader>p', function()
-  vim.lsp.buf.format {
-    timeout_ms = 1000,
-    async = true,
-  }
-end)
+-- local null_ls = require("null-ls")
+-- 
+-- null_ls.setup({
+--   sources = {
+--     null_ls.builtins.formatting.prettier,
+--     -- null_ls.builtins.diagnostics.eslint,
+--     -- null_ls.builtins.completion.spell,
+--   },
+-- })
+-- 
+-- vim.keymap.set('n', '<leader>p', function()
+--   vim.lsp.buf.format {
+--     timeout_ms = 1000,
+--     async = true,
+--   }
+-- end)
 
 -- ----------------------------------------------------------------------------
 -- fidget
 -- ----------------------------------------------------------------------------
 require("fidget").setup()
+
+-- ----------------------------------------------------------------------------
+-- coc-docthis
+-- ----------------------------------------------------------------------------
+vim.keymap.set('n', '<leader>/', ':CocCommand docthis.documentThis<CR>')
+
+-- ----------------------------------------------------------------------------
+-- Mason
+-- ----------------------------------------------------------------------------
+require("mason").setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
+    }
+  }
+})
+require("mason-lspconfig").setup({
+  ensure_installed = { "tailwindcss" }
+})
+
+require('lspconfig').tailwindcss.setup({})
+
+-- ----------------------------------------------------------------------------
+-- Prettier
+-- ----------------------------------------------------------------------------
+vim.keymap.set('v', '<leader>p', '<Plug>(coc-format-selected)')
+vim.keymap.set('n', '<leader>p', '<Plug>(coc-format)')
+
+-- ----------------------------------------------------------------------------
+-- Mason
+-- ----------------------------------------------------------------------------
+require("mason").setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
+    }
+  }
+})
+require("mason-lspconfig").setup({
+  ensure_installed = { "tailwindcss" }
+})
+
+require('lspconfig').tailwindcss.setup({})
