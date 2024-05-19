@@ -3,7 +3,7 @@
 [user]
 	email = akippix@gmail.com
 	name = akippix
-	signingkey = B973CAB9BF4DA565597F188C7CB313BF4007F9AF
+	signingkey = F21FE10A6BFA44FBA8405709A58276F619147042
 [commit]
 	gpgsign = true
 [alias]
@@ -13,3 +13,5 @@
 	st = status
 	unstage = reset HEAD --
 	last = log -1 HEAD
+[gpg]
+	program = /opt/homebrew/bin/gpg
